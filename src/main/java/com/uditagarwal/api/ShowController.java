@@ -26,12 +26,12 @@ public class ShowController {
                              @NonNull final Integer durationInSeconds) {
         final Screen screen = theatreService.getScreen(screenId);
         final Movie movie = movieService.getMovie(movieId);
-        return showService.createShow(movie, screen, startTime, durationInSeconds).getId();
+        return showService.createShow(movie, screen, startTime, durationInSeconds).getShowId();
     }
 
     public List<String> getAvailableSeats(@NonNull final String showId) {
         final Show show = showService.getShow(showId);
         final List<Seat> availableSeats = seatAvailabilityService.getAvailableSeats(show);
-        return availableSeats.stream().map(Seat::getId).collect(Collectors.toList());
+        return availableSeats.stream().map(Seat::getSeatId).collect(Collectors.toList());
     }
 }

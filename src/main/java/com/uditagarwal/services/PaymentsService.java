@@ -27,8 +27,7 @@ public class PaymentsService {
         if (!bookingFailures.containsKey(booking)) {
             bookingFailures.put(booking, 0);
         }
-        final Integer currentFailuresCount = bookingFailures.get(booking);
-        final Integer newFailuresCount = currentFailuresCount + 1;
+        final Integer newFailuresCount = bookingFailures.get(booking) + 1;
         bookingFailures.put(booking, newFailuresCount);
         if (newFailuresCount > allowedRetries) {
             seatLockProvider.unlockSeats(booking.getShow(), booking.getSeatsBooked(), booking.getUser());

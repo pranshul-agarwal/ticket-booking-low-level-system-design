@@ -58,7 +58,7 @@ public class TheatreService {
 
     public Seat createSeatInScreen(@NonNull final Integer rowNo, @NonNull final Integer seatNo, @NonNull final Screen screen) {
         String seatId = UUID.randomUUID().toString();
-        Seat seat = new Seat(seatId, rowNo, seatNo);
+        Seat seat = Seat.builder().seatId(seatId).rowNo(rowNo).seatNo(seatNo).build();
         seats.put(seatId, seat);
         screen.addSeat(seat);
 

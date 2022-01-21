@@ -1,8 +1,5 @@
 package com.uditagarwal.model;
 
-
-import com.uditagarwal.model.Seat;
-import com.uditagarwal.model.Show;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

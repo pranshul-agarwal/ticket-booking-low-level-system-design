@@ -13,3 +13,4 @@
 * Checking if show creation is allowed. 
     * This mainly include implementing method `checkIfShowCreationAllowed` in `ShowService`.
 * Handling different types of movies like 3D, 7D, etc.
+

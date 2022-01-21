@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class Movie {
 
-    private final String id;
+    private final String movieId;
     private final String name;
 
     //Other metadata

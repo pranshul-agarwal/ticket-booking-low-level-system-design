@@ -9,15 +9,15 @@ import java.util.List;
 @Getter
 public class Booking {
 
-    private final String id;
+    private final String bookingId;
     private final Show show;
     private final List<Seat> seatsBooked;
     private final String user;
     private BookingStatus bookingStatus;
 
-    public Booking(@NonNull final String id, @NonNull final Show show, @NonNull final String user,
+    public Booking(@NonNull final String bookingId, @NonNull final Show show, @NonNull final String user,
                    @NonNull final List<Seat> seatsBooked) {
-        this.id = id;
+        this.bookingId = bookingId;
         this.show = show;
         this.seatsBooked = seatsBooked;
         this.user = user;

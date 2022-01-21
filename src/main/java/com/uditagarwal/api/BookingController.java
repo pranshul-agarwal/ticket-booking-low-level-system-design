@@ -20,6 +20,6 @@ public class BookingController {
                                 @NonNull final List<String> seatsIds) {
         final Show show = showService.getShow(showId);
         final List<Seat> seats = seatsIds.stream().map(theatreService::getSeat).collect(Collectors.toList());
-        return bookingService.createBooking(userId, show, seats).getId();
+        return bookingService.createBooking(userId, show, seats).getBookingId();
     }
 }

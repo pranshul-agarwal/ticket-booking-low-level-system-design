@@ -7,9 +7,9 @@ import java.util.Date;
 
 @AllArgsConstructor
 @Getter
+// join between movie and screen
 public class Show {
-
-    private final String id;
+    private final String showId;
     private final Movie movie;
     private final Screen screen;
     private final Date startTime;
