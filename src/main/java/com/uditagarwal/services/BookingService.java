@@ -12,7 +12,7 @@ import lombok.NonNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class BookingService {
+public class BookingService implements IBookingService {
 
     private final Map<String, Booking> showBookings;
     private final SeatLockProvider seatLockProvider;
@@ -22,6 +22,7 @@ public class BookingService {
         this.showBookings = new HashMap<>();
     }
 
+    @Override
     public Booking getBooking(@NonNull final String bookingId) {
         if (!showBookings.containsKey(bookingId)) {
             throw new NotFoundException();
@@ -29,6 +30,7 @@ public class BookingService {
         return showBookings.get(bookingId);
     }
 
+    @Override
     public List<Booking> getAllBookings(@NonNull final Show show) {
         List<Booking> response = new ArrayList<>();
         for (Booking booking : showBookings.values()) {
@@ -40,6 +42,7 @@ public class BookingService {
         return response;
     }
 
+    @Override
     public Booking createBooking(@NonNull final String userId, @NonNull final Show show,
                                  @NonNull final List<Seat> seats) {
         if (isAnySeatAlreadyBooked(show, seats)) {
@@ -53,6 +56,7 @@ public class BookingService {
         // TODO: Create timer for booking expiry
     }
 
+    @Override
     public List<Seat> getBookedSeats(@NonNull final Show show) {
         return getAllBookings(show).stream()
                 .filter(Booking::isConfirmed)
@@ -61,6 +65,7 @@ public class BookingService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void confirmBooking(@NonNull final Booking booking, @NonNull final String user) {
         if (!booking.getUser().equals(user)) {
             throw new BadRequestException();
