@@ -1,17 +1,28 @@
 package com.uditagarwal.model;
 
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
 import java.util.UUID;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-@AllArgsConstructor
-@Getter
+@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Seat {
+    @NonNull private UUID id;
+    @NonNull
+    private SeatType seatType;
+    private int row;
+    private int col;
+    private AtomicReference<SeatStatus> status = new AtomicReference<>(SeatStatus.FREE);
 
-    private final String seatId;
-    private final int rowNo;
-    private final int seatNo;
+    public boolean updateStatus(SeatStatus expectedStatus, SeatStatus newStatus) {
+        return status.compareAndSet(expectedStatus, newStatus);
+    }
 }

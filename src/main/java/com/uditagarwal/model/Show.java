@@ -1,17 +1,34 @@
 package com.uditagarwal.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Date;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+import java.util.Map;
+
+@Data
+@Builder
 @AllArgsConstructor
-@Getter
-// join between movie and screen
+@NoArgsConstructor
 public class Show {
-    private final String showId;
-    private final Movie movie;
-    private final Screen screen;
-    private final Date startTime;
-    private final Integer durationInSeconds;
+    @NonNull
+    private UUID id;
+    @NonNull private String movieId;
+    @NonNull private String screenId;
+    @NonNull private LocalDateTime startTime;
+    private int duration; // in minutes
+    private Map<SeatType, Double> prices = new ConcurrentHashMap<>();
+
+    public Map<SeatType, Double> getPrices() {
+        return Collections.unmodifiableMap(prices);
+    }
 }

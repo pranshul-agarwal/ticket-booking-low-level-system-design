@@ -1,44 +1,46 @@
 package com.uditagarwal.model;
 
-import com.uditagarwal.exceptions.InvalidStateException;
-import lombok.Getter;
+import com.uditagarwal.exception.InvalidStateException;
 import lombok.NonNull;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+import java.util.Collections;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Booking {
+    @NonNull private UUID id;
+    @NonNull private User user;
+    @NonNull private UUID showId;
+    private Payment payment;
+    private List<Seat> bookedSeats = new CopyOnWriteArrayList<>();
+    @NonNull private BookingStatus bookingStatus;
+    private double totalAmount;
 
-    private final String bookingId;
-    private final Show show;
-    private final List<Seat> seatsBooked;
-    private final String user;
-    private BookingStatus bookingStatus;
-
-    public Booking(@NonNull final String bookingId, @NonNull final Show show, @NonNull final String user,
-                   @NonNull final List<Seat> seatsBooked) {
-        this.bookingId = bookingId;
-        this.show = show;
-        this.seatsBooked = seatsBooked;
-        this.user = user;
-        this.bookingStatus = BookingStatus.Created;
+    public List<Seat> getBookedSeats() {
+        return Collections.unmodifiableList(bookedSeats);
     }
 
-    public boolean isConfirmed() {
-        return this.bookingStatus == BookingStatus.Confirmed;
-    }
-
-    public void confirmBooking() {
-        if (this.bookingStatus != BookingStatus.Created) {
-            throw new InvalidStateException();
-        }
-        this.bookingStatus = BookingStatus.Confirmed;
-    }
-
-    public void expireBooking() {
-        if (this.bookingStatus != BookingStatus.Created) {
-            throw new InvalidStateException();
-        }
-        this.bookingStatus = BookingStatus.Expired;
-    }
+//    public void confirmBooking() {
+//        if (this.bookingStatus != BookingStatus.PENDING) {
+//            throw new InvalidStateException();
+//        }
+//        this.bookingStatus = BookingStatus.Confirmed;
+//    }
+//
+//    public void expireBooking() {
+//        if (this.bookingStatus != BookingStatus.Created) {
+//            throw new InvalidStateException();
+//        }
+//        this.bookingStatus = BookingStatus.Expired;
+//    }
 }

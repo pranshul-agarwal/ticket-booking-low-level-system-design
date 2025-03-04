@@ -1,32 +1,26 @@
 package com.uditagarwal.model;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import lombok.NonNull;
 
-@Getter
+@Data
+@Builder
+@AllArgsConstructor
 public class Screen {
-
-    private final String screenId;
+    @NonNull
+    private UUID id;
     private final String name;
     private final Theatre theatre;
     //Other screen metadata.
+    private List<Seat> seats = new CopyOnWriteArrayList<>();
 
-    private final List<Seat> seats;
-
-    public Screen(@NonNull final String screenId, @NonNull final String name, @NonNull final Theatre theatre) {
-        this.screenId = screenId;
-        this.name = name;
-        this.theatre = theatre;
-        this.seats = new ArrayList<>();
+    public synchronized boolean addSeat(Seat seat) {
+        return seats.add(seat);
     }
-
-    public void addSeat(@NonNull final Seat seat) {
-        this.seats.add(seat);
-    }
-
 }
