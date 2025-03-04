@@ -2,9 +2,8 @@ package com.uditagarwal.service;
 
 import com.uditagarwal.exception.BadRequestException;
 import com.uditagarwal.model.*;
-import com.uditagarwal.service.BookingServiceImpl;
-import com.uditagarwal.service.SeatAvailabilityService;
-import com.uditagarwal.service.ShowService;
+import com.uditagarwal.model.theatre.Seat;
+import com.uditagarwal.model.theatre.SeatType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -2,6 +2,8 @@ package com.uditagarwal.service;
 
 import com.uditagarwal.exception.BadRequestException;
 import com.uditagarwal.model.*;
+import com.uditagarwal.model.theatre.Seat;
+import com.uditagarwal.model.theatre.Show;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

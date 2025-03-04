@@ -1,7 +1,7 @@
 package com.uditagarwal.service;
 
 import com.uditagarwal.model.Booking;
-import com.uditagarwal.model.Seat;
+import com.uditagarwal.model.theatre.Seat;
 import lombok.NonNull;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.uditagarwal.model;
+package com.uditagarwal.model.theatre;
 
 public enum SeatType {
     REGULAR, PREMIUM, ACCESSIBLE

@@ -1,7 +1,7 @@
 package com.uditagarwal.service;
 
-import com.uditagarwal.model.Screen;
-import com.uditagarwal.model.Theatre;
+import com.uditagarwal.model.theatre.Screen;
+import com.uditagarwal.model.theatre.Theatre;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 

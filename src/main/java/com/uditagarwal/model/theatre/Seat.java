@@ -1,10 +1,9 @@
-package com.uditagarwal.model;
+package com.uditagarwal.model.theatre;
 
 import java.util.concurrent.atomic.AtomicReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.UUID;
 import lombok.NoArgsConstructor;

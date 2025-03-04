@@ -1,6 +1,6 @@
 package com.uditagarwal.model;
 
-import com.uditagarwal.exception.InvalidStateException;
+import com.uditagarwal.model.theatre.Seat;
 import lombok.NonNull;
 
 import java.util.List;

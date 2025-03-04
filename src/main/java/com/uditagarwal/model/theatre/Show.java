@@ -1,15 +1,13 @@
-package com.uditagarwal.model;
+package com.uditagarwal.model.theatre;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 

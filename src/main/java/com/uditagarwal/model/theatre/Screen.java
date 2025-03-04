@@ -1,4 +1,4 @@
-package com.uditagarwal.model;
+package com.uditagarwal.model.theatre;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.AllArgsConstructor;
