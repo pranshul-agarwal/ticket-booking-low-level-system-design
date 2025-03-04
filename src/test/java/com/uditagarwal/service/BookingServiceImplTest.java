@@ -2,11 +2,18 @@ package com.uditagarwal.service;
 
 import com.uditagarwal.exception.BadRequestException;
 import com.uditagarwal.model.*;
+import com.uditagarwal.service.BookingServiceImpl;
+import com.uditagarwal.service.SeatAvailabilityService;
+import com.uditagarwal.service.ShowService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,6 +46,40 @@ public class BookingServiceImplTest {
         seatPrices.put(SeatType.REGULAR, 100.0);
 
         showService.createShow(showId, UUID.randomUUID(), UUID.randomUUID(), LocalDateTime.now(), 120, seatPrices);
+    }
+
+    /**
+     * Test concurrency by attempting to book the same seats with multiple threads.
+     */
+    @Test
+    public void testConcurrencyForSeatBooking() throws InterruptedException {
+        int numberOfThreads = 10;
+        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
+
+        AtomicInteger successfulBookings = new AtomicInteger(0);
+        AtomicInteger failedBookings = new AtomicInteger(0);
+
+        for (int i = 0; i < numberOfThreads; i++) {
+            final String userId = "user" + i;
+            executorService.submit(() -> {
+                try {
+                    bookingService.createBooking(showId, availableSeats, userId);
+                    successfulBookings.incrementAndGet();
+                } catch (BadRequestException e) {
+                    failedBookings.incrementAndGet();
+                    System.out.println("Booking failed for " + userId + ": " + e.getMessage());
+                }
+            });
+        }
+
+        executorService.shutdown();
+        if (!executorService.awaitTermination(5, TimeUnit.SECONDS)) {
+            System.out.println("Not all tasks completed. Forcing shutdown...");
+            executorService.shutdownNow();
+        }
+
+        assertEquals(1, successfulBookings.get(), "Only one booking should be successful.");
+        assertEquals(numberOfThreads - 1, failedBookings.get(), "Remaining bookings should fail.");
     }
 
     @Test
