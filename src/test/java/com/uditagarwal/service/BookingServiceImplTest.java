@@ -70,9 +70,14 @@ public class BookingServiceImplTest {
 
     @Test
     public void testCreateBooking_SeatAlreadyBooked() {
+        // Arrange: Create and confirm an initial booking
         Booking initialBooking = bookingService.createBooking(showId, availableSeats, userId);
-        bookingService.confirmBooking(initialBooking, userId);
 
+        // Act: Confirm the booking to change status to CONFIRMED
+        boolean isConfirmed = bookingService.confirmBooking(initialBooking, userId);
+        assertTrue(isConfirmed, "Booking should be confirmed");
+
+        // Act & Assert: Attempting to book the same seats should fail with a booked seat exception
         Exception exception = assertThrows(BadRequestException.class, () -> {
             bookingService.createBooking(showId, availableSeats, "newUser");
         });
