@@ -1,4 +1,4 @@
-package com.uditagarwal.exceptions;
+package com.uditagarwal.exception;
 
 public class InvalidStateException extends RuntimeException {
 }
